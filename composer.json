@@ -1,0 +1,28 @@
+{
+  "name": "php-taskman/core-shim",
+  "description": "",
+  "type": "library",
+  "license": ["MIT"],
+  "authors": [
+  ],
+  "bin": [
+    "taskman.phar"
+  ],
+  "require": {
+    "php": ">= 7.4",
+    "ext-json": "*",
+    "phptaskman/core": "dev-master"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "humbug/box": "^3.12.0",
+    "jetbrains/phpstorm-stubs": "dev-master@dev"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "archive": {
+    "exclude": ["Makefile", "build"]
+  }
+}
