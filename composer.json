@@ -21,5 +21,13 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "scripts": {
+        "compile": [
+            "composer install --working-dir='vendor/phptaskman/core' --no-scripts --no-plugins --no-dev --no-interaction --optimize-autoloader",
+            "vendor/bin/box compile --working-dir='vendor/phptaskman/core'",
+            "php -r \"copy('vendor/phptaskman/core/taskman.phar', 'taskman.phar');\"",
+            "php -r \"file_put_contents('taskman.phar.sha1sum', hash_file('sha1', 'taskman.phar'));\""
+        ]
     }
 }
