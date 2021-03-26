@@ -64,7 +64,6 @@ jobs:
 
             - name: Build phar
               run: |
-                cp box/* 'vendor/phptaskman/core'
                 composer install --working-dir='vendor/phptaskman/core' --no-scripts --no-plugins --no-dev --no-interaction --optimize-autoloader
                 ./vendor/bin/box compile --working-dir='vendor/phptaskman/core'
 
