@@ -66,7 +66,8 @@ jobs:
               run: |
                 composer install --working-dir='vendor/phptaskman/core' --no-scripts --no-plugins --no-dev --no-interaction --optimize-autoloader
                 ./vendor/bin/box compile --working-dir='vendor/phptaskman/core'
-                sha1sum vendor/phptaskman/core/taskman.phar > sha1sum.txt
+                cp vendor/phptaskman/core/taskman.phar taskman.phar
+                sha1sum taskman.phar > sha1sum.txt
 
             - name: Upload build assets
               uses: actions/upload-artifact@v2
