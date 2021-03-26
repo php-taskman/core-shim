@@ -66,6 +66,7 @@ jobs:
               run: |
                 composer install --working-dir='vendor/phptaskman/core' --no-scripts --no-plugins --no-dev --no-interaction --optimize-autoloader
                 ./vendor/bin/box compile --working-dir='vendor/phptaskman/core'
+                sha1sum vendor/phptaskman/core/taskman.phar > sha1sum.txt
 
             - name: Upload build assets
               uses: actions/upload-artifact@v2
@@ -73,6 +74,11 @@ jobs:
                 name: taskman.phar
                 path: vendor/phptaskman/core/taskman.phar
 
+            - name: Upload build assets checksum
+              uses: actions/upload-artifact@v2
+              with:
+                name: sha1sum.txt
+                path: sha1sum.txt
 
     release:
         name: "Create tag/pre-release"
@@ -103,6 +109,11 @@ jobs:
           with:
             name: taskman.phar
 
+        - name: Download build assets
+          uses: actions/download-artifact@v2
+          with:
+            name: sha1sum.txt
+
         - name: Upload release assets
           uses: actions/upload-release-asset@v1
           env:
@@ -112,3 +123,13 @@ jobs:
             asset_path: ./taskman.phar
             asset_name: taskman.phar
             asset_content_type: application/octet-stream
+
+        - name: Upload release assets
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ needs.release.outputs.upload_url }}
+            asset_path: ./sha1sum.txt
+            asset_name: sha1sum.txt
+            asset_content_type: application/text
