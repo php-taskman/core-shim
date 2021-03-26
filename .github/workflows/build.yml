@@ -109,7 +109,7 @@ jobs:
         - name: Download build assets
           uses: actions/download-artifact@v2
           with:
-            name: sha1sum.txt
+            name: taskman.phar.sha1sum
 
         - name: Upload release assets
           uses: actions/upload-release-asset@v1
